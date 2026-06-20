@@ -1,0 +1,16 @@
+{
+  "name": "mail-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Email Worker — 收发分离的可发送可回复域名邮箱",
+  "main": "src/worker.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "author": "GR",
+  "license": "MIT",
+  "dependencies": {
+    "postal-mime": "^2.7.4"
+  }
+}

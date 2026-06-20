@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Wrangler
+.wrangler/
+
+# Environment (contains secrets — DO NOT COMMIT)
+.env
+
+# OS
+.DS_Store
+Thumbs.db
