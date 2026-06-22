@@ -110,6 +110,7 @@ Body…
 | `cc` | Optional |
 | `bcc` | Optional |
 | `subject` | Optional (inherits) |
+| `from_name` | Optional (defaults to global FROM_NAME) |
 
 ## Attachments
 

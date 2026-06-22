@@ -211,6 +211,7 @@ function parseSendMeta(text) {
     if (key === 'to' || key === 'cc' || key === 'bcc')
       result[key] = value.split(',').map(s => s.trim()).filter(Boolean);
     else if (key === 'subject') result.subject = value;
+    else if (key === 'from_name') result.from_name = value;
   }
   return result.to?.length ? result : null;
 }
@@ -473,7 +474,7 @@ async function handleSend(message, env, preParsed) {
   const subject = sendMeta.subject || message.headers.get('subject') || '(无主题)';
 
   await sendEmail(env, {
-    to: sendMeta.to, from: workerAddress, fromName: env.FROM_NAME, subject,
+    to: sendMeta.to, from: workerAddress, fromName: sendMeta.from_name || env.FROM_NAME, subject,
     textBody: finalTextBody, htmlBody: finalHtmlBody,
     cc: sendMeta.cc, bcc: sendMeta.bcc,
     attachments, replyTo: workerAddress,

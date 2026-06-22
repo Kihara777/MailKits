@@ -113,6 +113,7 @@ subject: 自定义主题
 | `cc` | 选填 |
 | `bcc` | 选填 |
 | `subject` | 选填（默认继承） |
+| `from_name` | 选填（默认全局 FROM_NAME） |
 
 ## 附件
 
