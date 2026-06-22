@@ -132,7 +132,7 @@ Body…
 | Non-B forges send header | Forward to B (no relay) |
 | B reply + send header | Reply overrides send |
 | B pure send header | Normal proxy send |
-| Send to Worker/B address | Auto-filtered, skipped |
+| Send to Worker/B/noreply address | Auto-filtered, skipped |
 
 ## Stack
 
