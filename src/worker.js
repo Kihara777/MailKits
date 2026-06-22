@@ -212,6 +212,7 @@ function parseSendMeta(text) {
       result[key] = value.split(',').map(s => s.trim()).filter(Boolean);
     else if (key === 'subject') result.subject = value;
     else if (key === 'from_name') result.from_name = value;
+    else if (key === 'noreply') result.noreply = /^(?:true|yes|1)$/i.test(value);
   }
   return result.to?.length ? result : null;
 }
@@ -326,9 +327,12 @@ async function parseAttachmentsFromRaw(message) {
   return (await parseRawMessage(message)).attachments;
 }
 
+// ── 地址构造 ──────────────────────────────────────────────────
+function workerAddr(env) { return env.WORKER_ALIAS + '@' + env.WORKER_DOMAIN; }
+
 // ── 转发模式 ────────────────────────────────────────────────────
 async function handleForward(message, env) {
-  const workerAddress = env.WORKER_ADDRESS;
+  const workerAddress = workerAddr(env);
   const myAddress = env.MY_ADDRESS;
   const from = message.from || '';
   const rawSubject = message.headers.get('subject') || '(无主题)';
@@ -379,7 +383,7 @@ async function handleForward(message, env) {
 
   // ── 回复模式 ────────────────────────────────────────────────────
 async function handleReply(message, env, meta, preParsed) {
-  const workerAddress = env.WORKER_ADDRESS;
+  const workerAddress = workerAddr(env);
   const myAddress = env.MY_ADDRESS;
 
   console.log(`[Reply] To: ${meta.from}, thread: ${meta.tid}`);
@@ -428,7 +432,7 @@ async function handleReply(message, env, meta, preParsed) {
 
   // ── 发送模式 ────────────────────────────────────────────────────
 async function handleSend(message, env, preParsed) {
-  const workerAddress = env.WORKER_ADDRESS;
+  const workerAddress = workerAddr(env);
 
   const data = preParsed || await parseRawMessage(message);
   const textBody = data.text, htmlBody = data.html, attachments = data.attachments;
@@ -446,7 +450,7 @@ async function handleSend(message, env, preParsed) {
 
   // 安全防护：过滤 Worker 自身和 B 地址，防止自指发送
   const myAddress = env.MY_ADDRESS;
-  const filtered = (list) => (list || []).filter(a => a !== workerAddress && a !== myAddress);
+  const filtered = (list) => (list || []).filter(a => a !== workerAddr(env) && a !== myAddress);
   sendMeta.to = filtered(sendMeta.to);
   if (sendMeta.cc) sendMeta.cc = filtered(sendMeta.cc);
   if (sendMeta.bcc) sendMeta.bcc = filtered(sendMeta.bcc);
@@ -474,7 +478,10 @@ async function handleSend(message, env, preParsed) {
   const subject = sendMeta.subject || message.headers.get('subject') || '(无主题)';
 
   await sendEmail(env, {
-    to: sendMeta.to, from: workerAddress, fromName: sendMeta.from_name || env.FROM_NAME, subject,
+    to: sendMeta.to,
+    from: sendMeta.noreply ? 'noreply@' + env.WORKER_DOMAIN : workerAddress,
+    fromName: sendMeta.from_name || env.FROM_NAME,
+    subject,
     textBody: finalTextBody, htmlBody: finalHtmlBody,
     cc: sendMeta.cc, bcc: sendMeta.bcc,
     attachments, replyTo: workerAddress,
