@@ -37,9 +37,14 @@ A（外部） → <WORKER_ADDRESS> → Email Routing → mail-worker
 ```bash
 cd MailKits
 npm install
-# wrangler.toml を編集して WORKER_ADDRESS と MY_ADDRESS を設定
+# cp .env.example .env && vim .env  # 設定を記入
+npm run setup                       # Email Routing ルールを自動設定
 npx wrangler secret put RESEND_API_KEY
-npx wrangler deploy
+npx wrangler deploy \
+  --var WORKER_DOMAIN:your.domain \
+  --var WORKER_ALIAS:worker \
+  --var MY_ADDRESS:you@example.com \
+  --var FROM_NAME:YourName
 ```
 
 > **前提**：Cloudflare Email Routing 設定済、Resend ドメイン検証済。

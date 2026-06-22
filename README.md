@@ -37,12 +37,14 @@ A（外部发件人） → <WORKER_ADDRESS> → Email Routing → mail-worker
 ```bash
 cd MailKits
 npm install
-# 修改 wrangler.toml 中的 WORKER_ADDRESS 和 MY_ADDRESS
-# 或使用 --var 标志：
+# cp .env.example .env && vim .env  # 填写你的配置
+npm run setup                       # 自动配置 Email Routing 规则
 npx wrangler secret put RESEND_API_KEY
 npx wrangler deploy \
-  --var WORKER_ADDRESS:user@your.domain \
-  --var MY_ADDRESS:you@example.com
+  --var WORKER_DOMAIN:your.domain \
+  --var WORKER_ALIAS:worker \
+  --var MY_ADDRESS:you@example.com \
+  --var FROM_NAME:YourName
 ```
 
 > **前置**：Cloudflare Email Routing 已配置、Resend 域名已验证。

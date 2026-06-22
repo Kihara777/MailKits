@@ -5,6 +5,7 @@
   "description": "Cloudflare Email Worker — 收发分离的可发送可回复域名邮箱",
   "main": "src/worker.js",
   "scripts": {
+    "setup": "bash scripts/setup.sh",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev"
   },
