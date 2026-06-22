@@ -37,9 +37,12 @@ A（外部发件人） → <WORKER_ADDRESS> → Email Routing → mail-worker
 ```bash
 cd MailKits
 npm install
-# 编辑 wrangler.toml 设置 WORKER_ADDRESS 和 MY_ADDRESS
+# 修改 wrangler.toml 中的 WORKER_ADDRESS 和 MY_ADDRESS
+# 或使用 --var 标志：
 npx wrangler secret put RESEND_API_KEY
-npx wrangler deploy
+npx wrangler deploy \
+  --var WORKER_ADDRESS:user@your.domain \
+  --var MY_ADDRESS:you@example.com
 ```
 
 > **前置**：Cloudflare Email Routing 已配置、Resend 域名已验证。
@@ -123,6 +126,7 @@ subject: 自定义主题
 | 非 B 伪造发送头 | 转发给 B（不中继） |
 | B 回复 + 发送头 | 回复优先于发送 |
 | B 纯发送头 | 正常代理发送 |
+| 发送头含 Worker/B 地址 | 自动过滤，跳过 |
 
 ## 技术栈
 

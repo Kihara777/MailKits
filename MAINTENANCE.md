@@ -24,3 +24,9 @@
 - 转发标题前缀 `[FWD]`
 - Meta 提取正则支持大小写不敏感和引用前缀 `>`
 - 文档按 NixKits 风格编写（中英日三语、表驱动）
+
+## 2026-06-22 — 安全加固
+
+- 发送模式过滤 `WORKER_ADDRESS` 和 `MY_ADDRESS`（防止自指发送和回显）
+- 开源就绪：去硬编码、创建 `.gitignore` / `.env.example`
+- 发布到 GitHub（`Kihara777/MailKits`，MIT 协议）
