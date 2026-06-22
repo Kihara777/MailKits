@@ -48,7 +48,8 @@ npx wrangler deploy
 
 | Variable | Description |
 |----------|-------------|
-| `WORKER_ADDRESS` | Worker inbound address |
+| `WORKER_DOMAIN` | Domain (constructs `alias@domain`) |
+| `WORKER_ALIAS` | Worker prefix (constructs `alias@domain`) |
 | `MY_ADDRESS` | B address (your mailbox) |
 | `FROM_NAME` | Sender display name |
 | `RESEND_API_KEY` | Resend API key (secret) |
@@ -111,6 +112,7 @@ Body…
 | `bcc` | Optional |
 | `subject` | Optional (inherits) |
 | `from_name` | Optional (defaults to global FROM_NAME) |
+| `noreply` | Optional (`true` sends from `noreply@domain`) |
 
 ## Attachments
 

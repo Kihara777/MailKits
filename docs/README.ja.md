@@ -48,7 +48,8 @@ npx wrangler deploy
 
 | 変数 | 説明 |
 |------|------|
-| `WORKER_ADDRESS` | Worker 受信アドレス |
+| `WORKER_DOMAIN` | ドメイン（`alias@domain` 構築） |
+| `WORKER_ALIAS` | Worker 接頭辞（`alias@domain` 構築） |
 | `MY_ADDRESS` | B アドレス（あなたのメール） |
 | `FROM_NAME` | 送信者表示名 |
 | `RESEND_API_KEY` | Resend API キー（secret） |
@@ -111,6 +112,7 @@ subject: カスタム件名
 | `bcc` | 任意 |
 | `subject` | 任意（継承） |
 | `from_name` | 任意（グローバル FROM_NAME にフォールバック） |
+| `noreply` | 任意（`true` で `noreply@domain` から送信） |
 
 ## 添付ファイル
 

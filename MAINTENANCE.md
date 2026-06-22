@@ -25,8 +25,13 @@
 - Meta 提取正则支持大小写不敏感和引用前缀 `>`
 - 文档按 NixKits 风格编写（中英日三语、表驱动）
 
-## 2026-06-22 — 安全加固
+## 2026-06-22 — 安全加固与功能扩展
 
 - 发送模式过滤 `WORKER_ADDRESS` 和 `MY_ADDRESS`（防止自指发送和回显）
+- 发件人显示名称 `FROM_NAME`（环境变量化）
+- 发送头 `from_name` 字段（按邮件自定义名称）
+- 发送头 `noreply` 字段（以 `noreply@domain` 发出）
+- 重构 `WORKER_ADDRESS` → `WORKER_ALIAS` + `WORKER_DOMAIN`（地址零硬编码）
+- 添加 `noreply@domain` → `drop` 规则（拒收 noreply 入站）
 - 开源就绪：去硬编码、创建 `.gitignore` / `.env.example`
 - 发布到 GitHub（`Kihara777/MailKits`，MIT 协议）

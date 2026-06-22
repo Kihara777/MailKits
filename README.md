@@ -51,7 +51,8 @@ npx wrangler deploy \
 
 | 变量 | 说明 |
 |------|------|
-| `WORKER_ADDRESS` | Worker 入站邮箱 |
+| `WORKER_DOMAIN` | 域名（构造 `alias@domain`） |
+| `WORKER_ALIAS` | Worker 前缀（构造 `alias@domain`） |
 | `MY_ADDRESS` | B 地址（你的邮箱） |
 | `FROM_NAME` | 发件人显示名称 |
 | `RESEND_API_KEY` | Resend API 密钥（secret） |
@@ -114,6 +115,7 @@ subject: 自定义主题
 | `bcc` | 选填 |
 | `subject` | 选填（默认继承） |
 | `from_name` | 选填（默认全局 FROM_NAME） |
+| `noreply` | 选填（`true` 时以 `noreply@domain` 发出） |
 
 ## 附件
 
