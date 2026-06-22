@@ -443,6 +443,17 @@ async function handleSend(message, env, preParsed) {
 
   console.log(`[Send] To: ${sendMeta.to.join(', ')}`);
 
+  // 安全防护：过滤 Worker 自身和 B 地址，防止自指发送
+  const myAddress = env.MY_ADDRESS;
+  const filtered = (list) => (list || []).filter(a => a !== workerAddress && a !== myAddress);
+  sendMeta.to = filtered(sendMeta.to);
+  if (sendMeta.cc) sendMeta.cc = filtered(sendMeta.cc);
+  if (sendMeta.bcc) sendMeta.bcc = filtered(sendMeta.bcc);
+  if (!sendMeta.to.length) {
+    console.log('[Send] All recipients filtered — skipping');
+    return null;
+  }
+
   let finalTextBody = null, finalHtmlBody = null;
   if (isHtml) {
     finalHtmlBody = cleanMetaFromHtml(stripSendMeta(bodyToProcess));
