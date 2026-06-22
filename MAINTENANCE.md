@@ -33,5 +33,6 @@
 - 发送头 `noreply` 字段（以 `noreply@domain` 发出）
 - 重构 `WORKER_ADDRESS` → `WORKER_ALIAS` + `WORKER_DOMAIN`（地址零硬编码）
 - 添加 `noreply@domain` → `drop` 规则（拒收 noreply 入站）
+- 发送头过滤器扩展为 Worker/B/noreply 三重排除
 - 开源就绪：去硬编码、创建 `.gitignore` / `.env.example`
 - 发布到 GitHub（`Kihara777/MailKits`，MIT 协议）
