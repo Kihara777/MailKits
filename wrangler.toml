@@ -4,10 +4,11 @@ name = "mail-worker"
 main = "src/worker.js"
 compatibility_date = "2024-12-01"
 
-# 环境变量（敏感信息用 wrangler secret 设置，非敏感在此定义）
+# 部署前修改为你的实际地址
 [vars]
-WORKER_ADDRESS = "user@example.com"
-MY_ADDRESS = "you@example.com"
+WORKER_ADDRESS = "CHANGE_ME@example.com"
+MY_ADDRESS = "CHANGE_ME@example.com"
+FROM_NAME = "My Name"
 
 # Email Worker 通过 Email Routing 触发，workers_dev 用于满足 wrangler 部署检查
 workers_dev = true

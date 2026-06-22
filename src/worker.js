@@ -368,7 +368,7 @@ async function handleForward(message, env) {
   const extraHeaders = embedMetaInHeaders({}, meta);
 
   await sendEmail(env, {
-    to: myAddress, from: workerAddress,
+    to: myAddress, from: workerAddress, fromName: env.FROM_NAME,
     subject: `[FWD] ${subject}`,
     textBody: forwardTextBody, htmlBody: forwardHtmlBody,
     replyTo: workerAddress, extraHeaders, attachments,
@@ -417,7 +417,7 @@ async function handleReply(message, env, meta, preParsed) {
   const references = origRefs ? `${origRefs} ${meta.msgid}` : meta.msgid;
 
   await sendEmail(env, {
-    to: meta.from, from: workerAddress, subject,
+    to: meta.from, from: workerAddress, fromName: env.FROM_NAME, subject,
     textBody: finalText, htmlBody: finalHtml,
     replyTo: workerAddress, inReplyTo: meta.msgid, references,
     extraHeaders, attachments,
@@ -473,7 +473,7 @@ async function handleSend(message, env, preParsed) {
   const subject = sendMeta.subject || message.headers.get('subject') || '(无主题)';
 
   await sendEmail(env, {
-    to: sendMeta.to, from: workerAddress, subject,
+    to: sendMeta.to, from: workerAddress, fromName: env.FROM_NAME, subject,
     textBody: finalTextBody, htmlBody: finalHtmlBody,
     cc: sendMeta.cc, bcc: sendMeta.bcc,
     attachments, replyTo: workerAddress,
