@@ -53,6 +53,7 @@ npx wrangler deploy \
 |------|------|
 | `WORKER_ADDRESS` | Worker 入站邮箱 |
 | `MY_ADDRESS` | B 地址（你的邮箱） |
+| `FROM_NAME` | 发件人显示名称 |
 | `RESEND_API_KEY` | Resend API 密钥（secret） |
 
 ## 元数据

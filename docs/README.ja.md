@@ -50,6 +50,7 @@ npx wrangler deploy
 |------|------|
 | `WORKER_ADDRESS` | Worker 受信アドレス |
 | `MY_ADDRESS` | B アドレス（あなたのメール） |
+| `FROM_NAME` | 送信者表示名 |
 | `RESEND_API_KEY` | Resend API キー（secret） |
 
 ## メタデータ

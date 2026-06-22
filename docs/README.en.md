@@ -50,6 +50,7 @@ npx wrangler deploy
 |----------|-------------|
 | `WORKER_ADDRESS` | Worker inbound address |
 | `MY_ADDRESS` | B address (your mailbox) |
+| `FROM_NAME` | Sender display name |
 | `RESEND_API_KEY` | Resend API key (secret) |
 
 ## Metadata
